@@ -1,9 +1,26 @@
 import React from "react"
 
+export interface User{
+    id:string
+    name:string
+    email:string 
+    title:string
+    organiazation:string
+}
 
-export const SearchPanel = ({ users, param, setParam }) => {
+interface SearchPanelProps{
+    users:User[],
+    param :{
+        name:string
+        personId:string
+    },
+    setParam:(param:SearchPanelProps['param']) => void
 
-    console.log(users)
+}
+
+export const SearchPanel = ({ users, param, setParam }:SearchPanelProps) => {
+
+    // console.log(users)
     return <form action="">
         {/*setParam(Object.assign({},param,{name:evt.target.value}))*/}
         <input type="text" value={param.name} onChange={evt => setParam({
@@ -17,7 +34,7 @@ export const SearchPanel = ({ users, param, setParam }) => {
         })} >
             <option value={''}>负责人</option>
             {
-                users.map(user => <option key={users.id} value={user.id}>{user.name}</option>)
+                users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)
             }
         </select>
 

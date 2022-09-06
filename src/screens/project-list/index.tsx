@@ -1,10 +1,8 @@
-import React from "react"
 import { SearchPanel } from "./search-panel"
 import { List } from "./list"
 import { useState, useEffect } from "react"
-import { cleanObject, useDebounce } from "../../utils"
-import qs from "qs"
-import { useMount } from "../../utils"
+import { cleanObject, useDebounce,useMount } from "../../utils"
+import * as qs from "qs"
 
 
 //读取.env
@@ -18,10 +16,11 @@ export const ProjectListScreen = () => {
     })
     const [list, setList] = useState([])
     const [users, setUsers] = useState([])
-    const debounceParam = useDebounce(param,2000)
+    const debounceParam = useDebounce(param,200)
 
     useEffect(() => {
         // fetch(`${apiUrl}/projects?name=${param.name}&personId=&{param.personId}`).then(async response => {
+        /*   let params = { c: 'b', a: 'd' };  qs.stringify(params)  // 结果是  'c=b&a=d'*/
         fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async response => {
             // console.log(response)
             if (response.ok) {
